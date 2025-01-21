@@ -4,10 +4,11 @@ import Image from 'next/image';
 export default function About() {
   return (
     <div className="container py-12 space-y-12">
+      {/* Hero Section */}
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold">About ExecuHire</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Transforming transportation into extraordinary experiences for life's most cherished moments
+          Transforming transportation into extraordinary experiences
         </p>
       </div>
       
@@ -21,6 +22,7 @@ export default function About() {
         />
       </div>
 
+      {/* Story & Mission */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <h2 className="text-2xl font-semibold">Our Story</h2>
@@ -40,6 +42,7 @@ export default function About() {
         </div>
       </div>
 
+      {/* Values */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {[
           {

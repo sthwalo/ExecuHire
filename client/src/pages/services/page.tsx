@@ -1,18 +1,18 @@
 import { Car, Camera, Music, Heart, GraduationCap, Clock } from 'lucide-react';
-import Image from 'next/image';
+import Image from 'react-router-dom';
 
 export default function Services() {
   const services = [
     {
       title: "Matric Dance",
       icon: GraduationCap,
-      description: "Make your matric dance an unforgettable experience with our luxury vehicles. We offer:",
+      description: "Make your matric dance unforgettable",
       features: [
-        "Special matric dance packages",
-        "Professional chauffeur service",
-        "Photo opportunity with the car",
-        "Red carpet arrival experience",
-        "Flexible 2-hour and half-day rates"
+        "Special matric packages",
+        "Professional chauffeur",
+        "Photo opportunities",
+        "Red carpet service",
+        "Flexible rates"
       ],
       image: "/images/services/matric.avif"
     },
@@ -88,7 +88,7 @@ export default function Services() {
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Our Services</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Make your special moments unforgettable with our luxury vehicle experiences
+          Premium vehicle experiences for every occasion
         </p>
       </div>
 

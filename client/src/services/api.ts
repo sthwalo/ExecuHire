@@ -1,9 +1,10 @@
-import axios from 'axios';
-import type { Vehicle, Booking, Payment } from '@/src/types';
+import axios, { AxiosInstance } from 'axios';
+import { Vehicle, Booking, Payment } from '../types';
 
-// Create axios instance with default config
-const api = axios.create({
-  baseURL: '/api',
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+
+const api: AxiosInstance = axios.create({
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -12,13 +13,21 @@ const api = axios.create({
 // Vehicle Service
 export class VehicleService {
   static async getAll(): Promise<Vehicle[]> {
-    const response = await api.get('/vehicles');
-    return response.data;
+    try {
+      const response = await api.get('/vehicles.php');
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
   }
 
   static async getById(id: string): Promise<Vehicle> {
-    const response = await api.get(`/vehicles/${id}`);
-    return response.data;
+    try {
+      const response = await api.get(`/vehicles.php?id=${id}`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
   }
 
   static async checkAvailability(id: string, startDate: Date, endDate: Date): Promise<boolean> {
@@ -27,13 +36,24 @@ export class VehicleService {
     });
     return response.data.available;
   }
+
+  private static handleError(error: any): Error {
+    if (axios.isAxiosError(error)) {
+      return new Error(error.response?.data?.message || 'An error occurred');
+    }
+    return error;
+  }
 }
 
 // Booking Service
 export class BookingService {
   static async create(booking: Partial<Booking>): Promise<Booking> {
-    const response = await api.post('/bookings', booking);
-    return response.data;
+    try {
+      const response = await api.post('/bookings.php', booking);
+      return response.data;
+    } catch (error) {
+      throw VehicleService.handleError(error);
+    }
   }
 
   static async getByUser(userId: string): Promise<Booking[]> {
@@ -62,15 +82,25 @@ export class PaymentService {
   }
 }
 
+// Add authentication interceptor
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 // Error handling interceptor
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Handle common errors (401, 403, 500, etc.)
     if (error.response?.status === 401) {
-      // Handle unauthorized
+      localStorage.removeItem('token');
       window.location.href = '/login';
     }
     return Promise.reject(error);
   }
 );
+
+export default api;

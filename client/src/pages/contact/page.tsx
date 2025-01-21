@@ -13,13 +13,7 @@ export default function Contact() {
 
   return (
     <div className="container py-12">
-      <div className="text-center space-y-4 mb-12">
-        <h1 className="text-4xl font-bold">Contact Us</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Get in touch with us for bookings and inquiries
-        </p>
-      </div>
-
+      {/* Contact Info Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div className="space-y-8">
           <div className="bg-primary/5 p-6 rounded-lg space-y-6">
@@ -90,6 +84,7 @@ export default function Contact() {
           </div>
         </div>
 
+        {/* Map Section */}
         <div className="relative h-[500px] rounded-lg overflow-hidden">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.5436243241087!2d28.2447693!3d-25.8187697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956608a8b1b6a7%3A0x47b4c0e2c5719485!2sCopperleaf%20Golf%20Estate!5e0!3m2!1sen!2sza!4v1704883678654!5m2!1sen!2sza"

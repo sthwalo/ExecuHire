@@ -1,44 +1,47 @@
 # ExecuHire - Premium Vehicle Rental Platform
 
-ExecuHire is a modern, full-stack vehicle rental platform built with Node.js, Express, React, and Prisma. It offers a seamless experience for renting luxury vehicles with features like real-time availability, secure payments, and email notifications.
+A modern vehicle rental platform built with React, TypeScript, PHP, and PostgreSQL. It offers a seamless experience for renting luxury vehicles.
 
 ## 🚀 Features
 
 - **Authentication & Authorization**
-  - Secure JWT-based authentication
+  - JWT-based authentication with PHP backend
   - Role-based access control (Admin/User)
   - Protected API routes and admin dashboard
+
+- **Frontend (React + TypeScript)**
+  - Modern React components with TypeScript
+  - Redux Toolkit for state management
+  - React Router for navigation
+  - Tailwind CSS for styling
+  - Component-based architecture
+
+- **Backend (PHP)**
+  - RESTful API endpoints
+  - PostgreSQL database integration
+  - Secure session management
+  - File upload handling
+  - Email notifications
 
 - **Vehicle Management**
   - Real-time vehicle availability tracking
   - Dynamic pricing based on duration
-  - Comprehensive vehicle details and specifications
+  - Comprehensive vehicle details
   - Image galleries and video showcases
 
 - **Booking System**
   - Interactive booking calendar
   - Real-time availability checks
-  - Automated confirmation emails
-  - Booking history and status tracking
-
-- **Payment Integration**
-  - Secure payment processing with Stripe
-  - Multiple payment methods
-  - Automated payment receipts
-  - Payment status tracking
-
-- **User Experience**
-  - Responsive design for all devices
-  - Modern UI with Tailwind CSS
-  - Real-time notifications
-  - Interactive vehicle gallery
+  - PHP-powered email confirmations
+  - Booking history tracking
 
 ## 📋 Prerequisites
 
 - Node.js 18.x or higher
+- PHP 8.0 or higher
 - PostgreSQL 14.x or higher
-- Stripe account for payments
-- AWS S3 bucket for image storage (optional)
+- Composer for PHP dependencies
+- npm for JavaScript dependencies
 
 ## 🛠 Installation
 
@@ -51,7 +54,7 @@ cd execuhire
 2. Install dependencies for both client and server:
 ```bash
 cd client && npm install
-cd ../server && npm install
+cd ../server && composer install
 ```
 
 3. Set up environment variables:
@@ -62,14 +65,14 @@ cp .env.example .env # Do this in both client and server directories
 4. Set up the database:
 ```bash
 cd server
-npx prisma migrate dev
-npx prisma db seed
+php artisan migrate
+php artisan db:seed
 ```
 
 5. Start the development servers:
 ```bash
 # In server directory
-npm run dev
+php artisan serve
 
 # In client directory (new terminal)
 npm start
@@ -81,25 +84,21 @@ npm start
 ```env
 # Database
 DATABASE_URL="postgresql://user:password@localhost:5432/execuhire"
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=
+DB_NAME=execuhire
 
 # JWT
 JWT_SECRET="your-jwt-secret-key"
 JWT_EXPIRES_IN="24h"
+JWT_SECRET=your-secret-key
 
-# Stripe
-STRIPE_SECRET_KEY="sk_test_..."
-STRIPE_WEBHOOK_SECRET="whsec_..."
-
-# AWS S3 (Optional)
-AWS_ACCESS_KEY_ID="your-access-key"
-AWS_SECRET_ACCESS_KEY="your-secret-key"
-AWS_REGION="your-region"
-AWS_BUCKET_NAME="your-bucket-name"
 ```
 
 ### Client (.env)
 ```env
-REACT_APP_API_URL="http://localhost:5000/api"
+REACT_APP_API_URL="http://localhost:8000/api"
 REACT_APP_STRIPE_PUBLISHABLE_KEY="pk_test_..."
 ```
 
@@ -253,28 +252,37 @@ For support, email support@execuhire.com or join our Slack channel.
 ## 📂 Project Structure
 
 ```markdown
-/ExecuHire/
-├── client/                 # React frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   └── utils/
-│   ├── package.json
-│   └── .env
-├── server/                 # Express backend
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   ├── utils/
-│   │   └── index.js
-│   ├── prisma/
-│   ├── package.json
-│   └── .env
-├── README.md
-└── .gitignore
+execuhire/
+├── client/                # React frontend
+│   ├── public/           # Static files
+│   └── src/
+│       ├── components/   # React components
+│       ├── pages/        # Route components
+│       ├── services/     # API services
+│       ├── store/        # Redux store
+│       └── types/        # TypeScript types
+├── server/               # PHP backend
+│   ├── public/          # Public entry point
+│   │   └── index.php
+│   ├── src/             # PHP source code
+│   │   ├── Controllers/ # API controllers
+│   │   │   ├── AuthController.php
+│   │   │   ├── BookingController.php
+│   │   │   └── VehicleController.php
+│   │   ├── Models/      # Database models
+│   │   │   ├── User.php
+│   │   │   ├── Vehicle.php
+│   │   │   └── Booking.php
+│   │   ├── Config/      # Configuration
+│   │   │   ├── Database.php
+│   │   │   └── Mail.php
+│   │   ├── Middleware/  # Middleware
+│   │   │   ├── Auth.php
+│   │   │   └── ErrorHandler.php
+│   │   └── Services/    # Services
+│   │       ├── EmailService.php
+│   │       └── FileUploadService.php
+│   └── composer.json    # PHP dependencies
+├── uploads/              # Uploads directory
+└── .env                  # Environment variables
 ```

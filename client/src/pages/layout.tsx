@@ -8,6 +8,9 @@ import { ReduxProvider } from '@/src/store/provider';
 import { SafeComponent } from '@/components/error-boundary';
 import { Providers } from './providers';
 import { Toaster } from '@/components/ui/toaster';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from './store';
+import { Routes } from './routes';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,17 +29,21 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <Providers>
-            <ReduxProvider>
+            <ReduxProvider store={store}>
               <SafeComponent>
-                <div className="flex min-h-screen flex-col">
-                  <Navigation />
-                  <main className="flex-1">{children}</main>
-                  <Footer />
-                </div>
+                <BrowserRouter>
+                  <div className="flex min-h-screen flex-col">
+                    <Navigation />
+                    <main className="flex-1">
+                      <Routes />
+                    </main>
+                    <Footer />
+                  </div>
+                  <Toaster />
+                </BrowserRouter>
               </SafeComponent>
             </ReduxProvider>
           </Providers>
-          <Toaster />
         </ThemeProvider>
       </body>
     </html>
