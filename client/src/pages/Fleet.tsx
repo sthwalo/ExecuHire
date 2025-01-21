@@ -1,4 +1,14 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Image } from '../components/Image';
+import { Button } from '../components/ui/button';
+import { Dialog } from '../components/ui/dialog';
+
 export default function Fleet() {
+  const navigate = useNavigate();
+  // Replace useSession with your auth context/hook
+  const { user } = useAuth();
+
   // For Phase 1, we'll use static data
   const vehicles = [
     {
