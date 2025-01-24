@@ -1,31 +1,37 @@
-import { BrowserRouter } from 'react-router-dom';
-import { Provider as ReduxProvider } from 'react-redux';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 import { store } from './store';
-import { ThemeProvider } from './components/theme-provider';
-import { Navigation } from './components/navigation';
-import { Footer } from './components/footer';
-import { Routes } from './Routes';
-import { ErrorBoundary } from 'react-error-boundary';
-import { Toaster } from './components/ui/toaster';
+
+// Layout
+import Layout from './components/Layout';
+
+// Pages
+import Home from './pages/Home';
+import Vehicles from './pages/Vehicles';
+import VehicleDetails from './pages/VehicleDetails';
+import Bookings from './pages/Bookings';
+import Profile from './pages/Profile';
+import AdminDashboard from './pages/admin/Dashboard';
 
 function App() {
   return (
-    <ReduxProvider store={store}>
-      <ThemeProvider>
-        <BrowserRouter>
-          <ErrorBoundary fallback={<div>Something went wrong</div>}>
-            <div className="flex min-h-screen flex-col">
-              <Navigation />
-              <main className="flex-1">
-                <Routes />
-              </main>
-              <Footer />
-            </div>
-            <Toaster />
-          </ErrorBoundary>
-        </BrowserRouter>
-      </ThemeProvider>
-    </ReduxProvider>
+    <Provider store={store}>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/vehicles" element={<Vehicles />} />
+            <Route path="/vehicles/:id" element={<VehicleDetails />} />
+            <Route path="/bookings" element={<Bookings />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+          </Routes>
+        </Layout>
+        <Toaster position="top-right" />
+      </Router>
+    </Provider>
   );
 }
 

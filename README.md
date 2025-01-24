@@ -47,7 +47,7 @@ A modern vehicle rental platform built with React, TypeScript, PHP, and PostgreS
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/execuhire.git
+git clone https://github.com/sthwalo/execuhire.git
 cd execuhire
 ```
 
@@ -83,11 +83,13 @@ npm start
 ### Server (.env)
 ```env
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/execuhire"
+DATABASE_URL="postgresql://sthwalonyoni:Exec10Luxury@localhost:5432/execuhire"
+DATABASE_URL="postgresql://sthwalonyoni:Exec10Luxury@localhost:5432/execuhire_test"
 DB_HOST=localhost
-DB_USER=root
-DB_PASS=
+DB_PORT=5432
 DB_NAME=execuhire
+DB_USER=sthwalonyoni
+DB_PASS=Exec10Luxury
 
 # JWT
 JWT_SECRET="your-jwt-secret-key"
@@ -128,7 +130,7 @@ cd server && npm start
   - Use PM2 for process management
   - Configure Nginx as reverse proxy
 
-- **Heroku**:
+- **Netlify**:
   - Deploy server as main app
   - Deploy client build as static files
   - Configure environment variables
