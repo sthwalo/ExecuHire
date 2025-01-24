@@ -20,6 +20,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Layout>
+          <Toaster position="top-center" reverseOrder={false} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/vehicles" element={<Vehicles />} />
@@ -29,7 +30,6 @@ function App() {
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </Layout>
-        <Toaster position="top-right" />
       </Router>
     </Provider>
   );

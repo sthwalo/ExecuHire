@@ -8,7 +8,6 @@ interface Booking {
   id: string;
   vehicle: {
     id: string;
-    brand: string;
     model: string;
     images: string[];
   };
