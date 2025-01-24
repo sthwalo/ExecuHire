@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/check-env.js",
     "dev": "vite",
     "build": "vite build",
-    "start": "vite",
-    "test": "vitest"
+    "preview": "vite preview",
+    "start": "vite"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
