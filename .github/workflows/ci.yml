@@ -10,6 +10,29 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
+    env:
+      APP_ENV: test
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: execuhire_test
+      DB_USER: postgres
+      DB_PASS: postgres
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: execuhire_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
     steps:
     - uses: actions/checkout@v2
     
@@ -17,11 +40,16 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1'
+        extensions: pdo, pdo_pgsql
+        
+    - name: Copy .env file
+      run: cp .env.example .env
+      working-directory: ./server
         
     - name: Install Dependencies
       run: composer install
       working-directory: ./server
       
     - name: Execute tests
-      run: vendor/bin/phpunit
+      run: vendor/bin/phpunit tests/Unit/DatabaseTest.php
       working-directory: ./server

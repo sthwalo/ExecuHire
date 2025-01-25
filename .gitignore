@@ -137,13 +137,13 @@ dist
 /node_modules
 /client/node_modules
 /server/node_modules
-/.pnp
-.pnp.js
+/server/vendor
 
 # Testing
 /coverage
 /frontend/coverage
 /backend/coverage
+/server/.phpunit.result.cache
 
 # Build outputs
 /build
@@ -151,6 +151,8 @@ dist
 /backend/dist
 /.next/
 /out/
+/client/build
+/client/dist
 
 # Environment files
 .env

@@ -749,3 +749,52 @@ If you're still experiencing issues:
 2. Join our [Discord Community](https://discord.gg/execuhire)
 3. Contact support at support@execuhire.com
 4. Create a new issue with detailed reproduction steps
+
+
+
+Check Composer Autoloading: Ensure that Composer's class Vehicle extends Model
+{
+// Model properties and methods
+}
+Code
+2. **Composer Aut autoloading is correctly configured. Run `composer dumpoloading**: Run `composer dump-autoload` to regenerate the-autoload` to regenerate the autoload files.
+
+3 autoloader files.
+
+3. **Check Namespace**: Ensure the namespace. **Correct Namespace in Test File**: Ensure that the declaration in `Vehicle.php` matches the one namespace and use statements in the test file are in the test case.
+
+4. **Fix the Test Case**: Make sure the test case is correctly referring to the ` correct.
+
+```php
+// server/tests/Unit/VehicleTest.php
+Vehicle` class.
+
+```php
+// File: server/testsnamespace Tests\Unit;
+
+use PHPUnit\Framework\Test/Unit/VehicleTest.php
+namespace Tests\Unit;
+
+  Case;
+use App\Models\Vehicle;
+
+class VehicleTest extends use PHPUnit\Framework\TestCase;
+use App\Models\Vehicle TestCase {
+ public function testCanCreateVehicle;
+
+class VehicleTest extends TestCase
+{
+ public function testCanCreateVehicle()
+ {
+() {
+  $vehicle = new Vehicle();
+  $           $vehicle = new Vehicle();
+     $this->assertInstanceOf(Vehicle::class, $vehicle);
+this->assertInstanceOf(Vehicle::class, $vehicle);
+ }
+}
+By ensuring the Vehicle class is }
+}
+
+Code
+By following these steps, you should be able properly defined and autoloaded, the test should be able to locate the class and run successfully to resolve the errors and get the tests to pass.. If the `Vehicle` class file is missing, you will need to create it with the appropriate namespace and class definition.
